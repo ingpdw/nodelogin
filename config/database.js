@@ -16,7 +16,9 @@ module.exports = {
         name: String,
         age: Number,
         company: String,
-        password: Number
+        password: Number,
+        isFacebook: Boolean,
+        facebookID: String
       });
 
       var user = mongoose.model('member', teamInfoSchema);

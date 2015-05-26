@@ -16,7 +16,7 @@ var express  = require('express'),
     session      = require('express-session'),
     passport = require('passport'),
     db = require('./config/database.js'),
-    dbUser = db.login.connect();
+    User = db.login.connect();
 
 app.use( serveStatic(__dirname + '/public'));
 app.use(morgan('dev'));
@@ -37,13 +37,40 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(new FacebookStrategy({
-        clientID: '****',
-        clientSecret: '****',
+        clientID: '***************',
+        clientSecret: '**************',
         callbackURL: 'http://localhost:3000/auth/facebook/callback'
     }
     ,function(accessToken,refreshToken, profile, done) {
-      console.log( profile );
-      done( null, profile);
+
+      User.findOne({'facebookID': profile.id}, function( err, user ){
+        if( !user ){
+
+          var user = {
+            'name': profile.name,
+            'age': 0,
+            'company': '',
+            'password': '',
+            'isFacebook': true,
+            'facebookID': profile.id
+          };
+
+          var user = new User( user );
+
+          user.save(function(err,silence){
+            if(err){
+              console.err(err);
+              throw err;
+            }
+            done( null, info);
+          });
+
+        }else{
+          done( null, user);
+        }
+
+      });
+
 
     }
 ));
