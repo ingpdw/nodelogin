@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+.facebookBtn{
+  width: 199px;
+  height: 42px;
+  background:url( '/images/login/signin-facebook-large.png');
+  background-size: 199px 42px;
+  text-indent: -9999px;
+  border: 0 none;
+}

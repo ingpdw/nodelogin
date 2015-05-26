@@ -1,0 +1,20 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>facebook Login</title>
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <script src="/javascripts/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+  <button id="fbLogin" class="facebookBtn">facebook login</button>
+  <script>
+    (function( $ ){
+      $( '#fbLogin' ).click( function(){
+        location.href = '/auth/facebook';
+      });
+    })( jQuery );
+  </script>
+</body>
+</html>
